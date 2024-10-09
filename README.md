@@ -16,7 +16,7 @@ Simply copy the pep2vec.bin file to a local directory, it can be executed on any
 ### Usage
 Inference is run with the following command:
 ```bash
-./pep2vec.bin –dataset /home/user/data/test_input.csv –output_location /home/user/test_output.parquet -mhctype mhc2 
+./pep2vec.bin –dataset /home/user/data/test_input_mhc1.csv –output_location /home/user/test_output.parquet -mhctype mhc2 
 ```
 
 Note that absolute paths are required for defining inputs and outputs.  The output is stored in a parquet format for efficiency, given there is a very large number of columns in the output file.

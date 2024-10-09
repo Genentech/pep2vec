@@ -13,8 +13,8 @@ print('Loading Data')
 df_temp = pd.read_parquet('./df_for_vizualization.parquet')
 df_temp['peptide_length'] = df_temp['peptide'].apply(len)
 df_temp = df_temp.rename(columns={'n_flank':'nFlank', 'c_flank':'cFlank'})
-df_temp['t_attn3_max'] = 0
-df_temp['chosen_allele'] = np.logical_or(df_temp['allele'], df_temp['allotype'])
+if 't_attn3_max' not in df_temp.columns: df_temp['t_attn3_max'] = 0
+if 'chosen_allele' not in df_temp.columns: df_temp['chosen_allele'] = df['allele']
 df_temp[['EL_pred', 'emb_0', 'emb_1', 'peptide_length']] = df_temp[['EL_pred', 'emb_0', 'emb_1', 'peptide_length']].astype(float)
 df_temp[['peptide', 'peptide_core', 'nFlank', 'cFlank']] = df_temp[['peptide', 'peptide_core', 'nFlank', 'cFlank']].astype(str)
 colorby_cols = [ 'split','mhctype', 
