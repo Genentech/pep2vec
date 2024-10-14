@@ -30,6 +30,7 @@ Note that absolute paths are required for defining inputs and outputs.  The outp
 
 ### Input Format
 See input_example.csv for an example of the input format.  The input file should be a csv with the following columns:
+
     - n_flank
        - The 5 amino acid sequence immediately preceding the peptide, if unavailable use '*****'
     - peptide
