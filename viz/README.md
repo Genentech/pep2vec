@@ -1,3 +1,9 @@
+# Dashboard
+
+This dashboard is a visualization tool for the pep2vec model. It allows for the selection of peptides and the visualization of the embeddings of those peptides. The dashboard is built using the panel library, which is a high-level app and dashboarding solution for Python.
+
+![Alt text](dashboard.png?raw=true "Title")
+
 # Setup Code
 install mamba
 mamba create -n pep2vec_viz python=3.11
