@@ -23,10 +23,12 @@ git lfs pull
 ### Usage
 Inference is run with the following command:
 ```bash
-./pep2vec.bin -–dataset /[full absolute path to repository]/test_input_mhc1.csv -–output_location [full absolute path to output folder]/test_output.parquet --mhctype mhc2 
+./pep2vec.bin -–dataset /[full absolute path to repository]/test_input_mhc1.csv -–output_location [full absolute path to output folder]/test_output.parquet --mhctype mhc1 
 ```
 
 Note that absolute paths are required for defining inputs and outputs.  The output is stored in a parquet format for efficiency, given there is a very large number of columns in the output file.
+
+"mhctype" must be either mhc1 or mhc2 depending on the type of MHC being scored.
 
 ### Input Format
 See input_example.csv for an example of the input format.  The input file should be a csv with the following columns:
