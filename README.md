@@ -13,10 +13,17 @@ See the 'viz' directory and the README.md there.
 ## Model Inference
 ### Installation
 Simply copy the pep2vec.bin file to a local directory, it can be executed on any linux operating system.  
+Note if checking the repository out make sure to install git lfs first to get the binary file.  
+```bash
+git lfs install
+git clone ...
+git lfs pull
+```
+
 ### Usage
 Inference is run with the following command:
 ```bash
-./pep2vec.bin –dataset /home/user/data/test_input_mhc1.csv –output_location /home/user/test_output.parquet -mhctype mhc2 
+./pep2vec.bin -–dataset /[full absolute path to repository]/test_input_mhc1.csv -–output_location [full absolute path to output folder]/test_output.parquet --mhctype mhc2 
 ```
 
 Note that absolute paths are required for defining inputs and outputs.  The output is stored in a parquet format for efficiency, given there is a very large number of columns in the output file.

@@ -26,7 +26,6 @@ stylesheet = """
 def get_dashboard(df, colorby_cols=None, agg_func=None, use_gpu=True):
     if colorby_cols is None: colorby_cols = [ 'split','mhctype', 'chosen_allele_type', 'EL_pred', 'peptide_length', 'dataset', 'chosen_allele', 't_attn3_max', 't_attn3_argmax']
     if agg_func is None: agg_func =     [ds.count_cat,ds.count_cat, ds.count_cat, ds.mean, ds.count_cat, ds.count_cat, ds.count_cat, ds.mean, ds.mean]
-    df['dataset'] = 'test'
     
    
     
@@ -130,8 +129,8 @@ def get_dashboard(df, colorby_cols=None, agg_func=None, use_gpu=True):
                 self.df_selected_indexs = self.link.filter(self.df).index.values
             self.df_selected = self.df.loc[self.df_selected_indexs,:]
             result = []
-            for col in ['split', 'mhctype', 'chosen_allele', 'dataset', 'peptide_length']:
-                summary = self.df_selected[col].value_counts().head().reset_index()
+            for col in ['mhctype', 'chosen_allele', 'dataset']:
+                summary = self.df_selected[col].value_counts().head(5).reset_index()
                 summary['group'] = col
                 result.append(summary.rename(columns={col:'name'}))
             self.df_selected_summary = pd.concat(result)
@@ -248,9 +247,15 @@ def get_dashboard(df, colorby_cols=None, agg_func=None, use_gpu=True):
 
         def view_bars(self): return pn.Row((self.view_binding_core_location() + self.view_binding_core_confidence() + self.view_p_bar() + self.view_el_pred()).cols(4).opts(toolbar='right'))
 
+        def view_save_selected(self):
+            button = pn.widgets.Button(name='Save Selected points to ./df_selected.parquet', button_type='primary', disabled=False)
+            button.on_click(lambda event: self.df_selected.to_parquet('df_selected.parquet')) 
+            return button
+
         def show(self):
             self.gspec[0,0] = pn.Column(self.color_option)
             self.gspec[1,0] = self.user_query
+            self.gspec[0,2] = self.view_save_selected
             self.gspec[2:13,0] = self.view_summary_df
             self.gspec[13:20,0] = pn.Column(self.motif_option, self.view_motif)
             self.gspec[1:16,   1:4] = self.view_scatter

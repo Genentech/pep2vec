@@ -10,8 +10,10 @@ pn.extension('terminal')
 pn.extension('tabulator')
 hv.extension('bokeh')
 print('Loading Data')
-df_temp = pd.read_parquet('./df_for_vizualization.parquet')
+df_temp = pd.read_parquet('./df_for_vizualization.parquet').reset_index(drop=True)
 df_temp['peptide_length'] = df_temp['peptide'].apply(len)
+if 'cFlank' in df_temp.columns: df_temp = df_temp.drop(columns=['cFlank'])
+if 'nFlank' in df_temp.columns: df_temp = df_temp.drop(columns=['nFlank'])
 df_temp = df_temp.rename(columns={'n_flank':'nFlank', 'c_flank':'cFlank'})
 if 't_attn3_max' not in df_temp.columns: df_temp['t_attn3_max'] = 0
 if 'chosen_allele' not in df_temp.columns: df_temp['chosen_allele'] = df['allele']
